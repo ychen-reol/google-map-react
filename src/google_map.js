@@ -251,21 +251,16 @@ export default class GoogleMap extends Component {
 
         if (
           !currCenter ||
-          Math.abs(nextPropsCenter.lat - currCenter.lat) +
-          Math.abs(nextPropsCenter.lng - currCenter.lng) > kEPS
+          Math.abs(nextPropsCenter.lat - centerLatLng.lat) +
+          Math.abs(nextPropsCenter.lng - centerLatLng.lng) > kEPS
         ) {
-          if (
-            Math.abs(nextPropsCenter.lat - centerLatLng.lat) +
-            Math.abs(nextPropsCenter.lng - centerLatLng.lng) > kEPS
-          ) {
-            this.map_.panTo({ lat: nextPropsCenter.lat, lng: nextPropsCenter.lng });
-          }
+          this.map_.panTo({ lat: nextPropsCenter.lat, lng: nextPropsCenter.lng });
         }
       }
 
       if (nextProps.zoom !== undefined) {
         // if zoom chaged by user
-        if (Math.abs(nextProps.zoom - this.props.zoom) > 0) {
+        if (Math.abs(nextProps.zoom - this.map_.getZoom()) > 0) {
           this.map_.setZoom(nextProps.zoom);
         }
       }
